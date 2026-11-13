@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Irrigation &amp; Water Reserve – Brochure</title>
+<meta name="description" content="IoT system that manages a water reserve and irrigates green zones automatically, controlled from an Android app. ESP32, Firebase, custom PCBs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Smart Irrigation &amp; Water Reserve">
+<meta property="og:description" content="Interactive 3D prototype, mobile app, Firebase cloud and PCB boards of my smart farming project.">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/YOUR-REPO/">
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/docs/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6f1;--ink:#0b2a3f;--mute:#4f6676;--card:#fff;--line:#d3ddd3;--navy:#0a3a5c;--teal:#12b8a6;--leaf:#4f9d2f;--pur:#6200ee;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1a24;--ink:#e8f1f0;--mute:#93a9b5;--card:#12273a;--line:#1f3a50}}
+:root[data-theme="dark"]{--bg:#0c1a24;--ink:#e8f1f0;--mute:#93a9b5;--card:#12273a;--line:#1f3a50}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'DM Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.08;margin:0;letter-spacing:-.02em}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:500}
+nav b{font:700 20px 'Space Grotesk',sans-serif}nav b i{color:var(--leaf);font-style:normal}
+.hero{padding:30px 0 40px;max-width:820px}
+.hero h1{font-size:clamp(42px,7vw,88px)}.hero h1 em{font-style:normal;color:var(--teal)}
+.hero p{font-size:20px;color:var(--mute);max-width:46ch;margin:20px 0 0}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.tag{background:var(--navy);color:#fff;padding:6px 14px;border-radius:99px;font-size:15px;font-weight:500}
+.lab{display:grid;grid-template-columns:1fr 300px;gap:24px;background:#0a2335;border-radius:14px;padding:22px;color:#e8f1f0}
+.view{position:relative;min-width:0}
+canvas{width:100%;aspect-ratio:16/10;display:block;border-radius:10px;background:radial-gradient(circle at 50% 30%,#14405f,#0a2335);cursor:grab;touch-action:pan-y}
+.read{position:absolute;left:12px;top:12px;font-size:13px;background:#0008;padding:6px 10px;border-radius:8px;line-height:1.4}
+.read b{color:var(--teal)}
+.hint{font-size:13px;color:#93a9b5;margin:8px 2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chips button{background:#12304a;color:#e8f1f0;border:1px solid #27506f;padding:6px 12px;border-radius:99px;font:500 14px 'DM Sans',sans-serif;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--teal);color:#06222b;border-color:var(--teal)}
+.info{margin-top:12px;background:#12304a;border-radius:10px;padding:12px 14px;min-height:76px;font-size:15px}
+.info b{font-family:'Space Grotesk',sans-serif;font-size:18px;display:block}
+.phone{width:280px;height:560px;margin:0 auto;background:#07121a;border-radius:34px;padding:9px;box-shadow:0 20px 40px #0008,inset 0 0 0 2px #35546b}
+.scr{height:100%;border-radius:26px;overflow:hidden;background:#fff;color:#222;font:14px Roboto,Arial,sans-serif;display:flex;flex-direction:column}
+.dark{background:#0a3a5c;color:#fff}
+.bar{background:var(--pur);color:#fff;padding:14px 16px;font-size:17px;font-weight:500}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:16px;text-align:center}
+.scr button{background:var(--pur);color:#fff;border:0;border-radius:3px;padding:11px 14px;font:500 12px Roboto,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;min-width:90px}
+.scr button.on{background:#12b8a6;color:#04211e}
+.scr input{width:80%;background:transparent;border:0;border-bottom:2px solid #12b8a6;color:#fff;padding:8px 2px;font-size:14px;margin:6px 0}
+.logo{font:700 26px Roboto,Arial,sans-serif}.logo i{color:#12b8a6;font-style:normal}
+.tank{width:34px;height:150px;background:#ddd;border-radius:3px;position:relative;overflow:hidden}
+.tank i{position:absolute;bottom:0;left:0;right:0;background:#12b8a6;transition:height .5s}
+.row{display:flex;gap:8px;width:100%;justify-content:center}
+.kv{width:100%;text-align:left;font-size:14px;line-height:1.7;color:#555}.kv b{display:inline-block;width:110px;font-weight:400}
+.li{width:100%;text-align:left;padding:14px 8px;border-bottom:1px solid #e3e3e3;cursor:pointer}
+.scr button:focus-visible,.chips button:focus-visible,.li:focus-visible{outline:3px solid #f2c200;outline-offset:2px}
+section{padding:64px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(32px,4.5vw,52px);margin-bottom:12px}
+.sub{color:var(--mute);max-width:56ch;margin:0 0 32px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.c h3{font-size:24px;margin-bottom:6px}.c p{margin:0;color:var(--mute)}
+.c .n{font:700 38px 'Space Grotesk',sans-serif;color:var(--teal)}
+.arch{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.arch div{flex:1;min-width:180px;background:var(--navy);color:#fff;padding:18px;border-radius:10px;margin:0 6px 6px 0}
+.arch b{display:block;font:700 20px 'Space Grotesk',sans-serif}.arch span{color:#bcd3e0;font-size:15px}
+footer{background:var(--navy);color:#e8f1f0;padding:34px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer p{margin:2px 0;color:#bcd3e0}
+@media (max-width:900px){.lab{grid-template-columns:1fr}.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><b>Firma<i>●</i>Irrigation</b><span>Smart farming · Agriculture 4.0</span></nav>
+<div class="hero">
+<h1>Water the field from your <em>pocket</em>.</h1>
+<p>An IoT system that manages a water reserve and irrigates green zones automatically, controlled and monitored from an Android app.</p>
+<div class="tags"><span class="tag">ESP32</span><span class="tag">Android app</span><span class="tag">Water reserve 4,000 L</span><span class="tag">Auto &amp; manual modes</span></div>
+</div>
+
+<div class="lab" id="lab">
+<div class="view">
+<canvas id="cv" aria-label="3D model of the irrigation system"></canvas>
+<div class="read" id="read"></div>
+<p class="hint">Drag to rotate. Pick a component to highlight it. The model reacts to the app.</p>
+<div class="chips" id="chips"></div>
+<div class="info" id="info"></div>
+</div>
+<div><div class="phone"><div class="scr" id="scr"></div></div>
+<p class="hint" style="text-align:center">Prototype: log in, power the pump, pick a zone, try Automatic mode.</p></div>
+</div>
+</div>
+
+<div class="wrap">
+<section>
+<h2>The electronic boards</h2>
+<p class="sub">Two custom PCBs, designed in Proteus: one manages the water reserve, the other drives irrigation. Rotate them and explore each connector.</p>
+<div class="lab" style="grid-template-columns:1fr"><div class="view">
+<div class="chips" id="bt" style="margin:0 0 12px"></div>
+<canvas id="pcv" aria-label="3D model of the PCB"></canvas>
+<p class="hint">Drag to rotate. Pick a part to highlight it on the board. Simplified 3D model of the layout in the project book.</p>
+<div class="chips" id="pch"></div>
+<div class="info" id="pin"></div>
+</div></div>
+</section>
+
+<section>
+<h2>The problem</h2>
+<p class="sub">Irrigation in Tunisia is still largely manual, and today’s timer-based systems fall short.</p>
+<div class="g3">
+<div class="c"><h3>Farmer must be on site</h3><p>Opening valves and watching the tank means being there.</p></div>
+<div class="c"><h3>No notifications</h3><p>Nobody is told when the reserve is low or a zone is dry.</p></div>
+<div class="c"><h3>No data</h3><p>Without measurements there is no way to improve yield.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Two systems, one app</h2>
+<p class="sub">The project splits watering into two sub-processes, both supervised from the same mobile application.</p>
+<div class="g3">
+<div class="c"><div class="n">01</div><h3>Water reserve</h3><p>A three-phase pump fills the tank. A float switch and a waterproof ultrasonic sensor track the level.</p></div>
+<div class="c"><div class="n">02</div><h3>Irrigation</h3><p>Soil moisture, air temperature and humidity decide when the solenoid valve opens, in automatic mode.</p></div>
+<div class="c"><div class="n">03</div><h3>Mobile control</h3><p>Log in, choose a green zone, read the sensors and switch the valve ON or OFF.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Architecture</h2>
+<p class="sub">From sensors to the farmer’s phone.</p>
+<div class="arch">
+<div><b>Sensors</b><span>Soil moisture, DHT11, JSN-SR04T, float switch</span></div>
+<div><b>ESP32</b><span>Reads inputs, drives relays, runs the auto and manual cycles</span></div>
+<div><b>Power</b><span>Relay, contactor, breaker, 5 V and 24 V supplies</span></div>
+<div><b>Android app</b><span>Login, zones, reserve and irrigation pages (Firebase SDK)</span></div>
+</div>
+</section>
+
+<section>
+<h2>Features</h2>
+<div class="g3" style="margin-top:24px">
+<div class="c"><h3>Automatic cycle</h3><p>Valve control based on soil moisture and time.</p></div>
+<div class="c"><h3>Manual cycle</h3><p>ON and OFF buttons for the valve, switch modes any time.</p></div>
+<div class="c"><h3>Multi-zone</h3><p>Navigate between several green zones.</p></div>
+<div class="c"><h3>Reserve monitoring</h3><p>Live tank level in percent and pump status.</p></div>
+<div class="c"><h3>Secure access</h3><p>Authentication before reaching the dashboard.</p></div>
+<div class="c"><h3>Flexible design</h3><p>Built to accept new sensors and zones later.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Tools used</h2>
+<div class="tags"><span class="tag">Android Studio</span><span class="tag">Firebase</span><span class="tag">Figma</span><span class="tag">Visual Paradigm</span><span class="tag">AutomGen</span><span class="tag">Fritzing</span><span class="tag">Proteus ISIS</span></div>
+</section>
+</div>
+
+<footer><div class="wrap"><div><b style="font:700 22px 'Space Grotesk',sans-serif">Smart Irrigation &amp; Water Reserve</b><p>By: add your name · Contact: add your email</p></div><p>Supervisor: Mr. Hichem Elayani · ATFP</p></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)};
+var S={scr:'login',level:56,pump:false,valve:false,auto:false,moist:35,zone:1};
+/* ---------- phone app ---------- */
+function bar(t){return '<div class="bar">'+t+'</div>'}
+function render(){var s=S.scr,h='';
+if(s=='login')h='<div class="scr dark" style="height:100%"><div class="body"><div class="logo">Firma App <i>❦</i></div><input value="farmer" aria-label="Login"><input type="password" value="••••••" aria-label="Password"><button data-a="go:reserve" style="background:#fff;color:#0a3a5c;margin-top:12px">Login</button></div></div>';
+if(s=='reserve')h='<div class="row" style="justify-content:space-between;padding:12px 14px"><button data-a="go:zones" aria-label="Menu" style="min-width:0">☰</button><button data-a="pump" aria-label="Pump power" class="'+(S.pump?'on':'')+'" style="min-width:0">⏻</button></div><div class="body"><div class="row" style="align-items:flex-end;gap:26px"><div style="font-size:54px">⚙️</div><div class="tank"><i style="height:'+S.level+'%"></i></div></div><div class="row" style="gap:50px;color:#555"><span>'+(S.pump?'ON':'OFF')+'</span><span>'+Math.round(S.level)+' %</span></div><button data-a="go:zones">Green zones</button></div>';
+if(s=='zones')h=bar('Zones')+'<div style="flex:1"><div class="li" tabindex="0" data-a="zone:1">GreenZone1</div><div class="li" tabindex="0" data-a="zone:2">GreenZone2</div></div><div class="body" style="flex:0"><button data-a="go:reserve">Return dashboard</button></div>';
+if(s=='farm')h=bar('IrrigationSystemV2')+'<div class="body"><div style="color:#777">FARMLAND '+S.zone+'</div><div class="kv"><b>Temperature :</b>24.00<br><b>Humidity :</b>55.00<br><b>Soil moisture :</b>'+Math.round(S.moist)+' %<br><b>Electrovanne :</b>'+(S.valve?'OPEN':'closed')+'</div>'+(S.auto?'':'<div class="row"><button data-a="v:1" class="'+(S.valve?'on':'')+'">On</button><button data-a="v:0" class="'+(S.valve?'':'on')+'">Off</button></div>')+'<button data-a="mode">'+(S.auto?'Manual mode':'Automatic mode')+'</button><button data-a="go:reserve">Return dashboard</button></div>';
+$('scr').innerHTML=h;
+}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-a]');if(!t)return;var a=t.dataset.a.split(':');
+if(a[0]=='go')S.scr=a[1];
+if(a[0]=='pump')S.pump=!S.pump&&S.level<95;
+if(a[0]=='zone'){S.zone=+a[1];S.scr='farm'}
+if(a[0]=='v')S.valve=a[1]=='1'&&S.level>5;
+if(a[0]=='mode'){S.auto=!S.auto}
+render()});
+document.addEventListener('keydown',function(e){if(e.key=='Enter'&&e.target.classList.contains('li'))e.target.click()});
+setInterval(function(){
+if(S.pump){S.level+=1.5;if(S.level>=95){S.level=95;S.pump=false}}
+if(S.auto){if(S.moist<30&&S.level>5)S.valve=true;if(S.moist>=65)S.valve=false}
+if(S.valve){S.moist=Math.min(100,S.moist+2);S.level=Math.max(0,S.level-.4);if(S.level<=0)S.valve=false}else S.moist=Math.max(10,S.moist-.4);
+if(S.scr=='reserve'||S.scr=='farm')render();sync()},700);
+/* ---------- components ---------- */
+var C=[['Water tank 4,000 L','tank','H2OPlus reservoir fed by the pump. Its level is the main value tracked by the system.'],
+['JSN-SR04T ultrasonic','us','Waterproof ultrasonic probe. The ESP32 sends a pulse on Trig, times the echo and converts it to a distance.'],
+['Float switch','float','Electric float that detects the water level and stops the pump when the tank is full.'],
+['Three-phase pump','pump','Pushes water from the source into the reserve. Started and stopped through the contactor.'],
+['Breaker, fuses, contactor','cab','Protect the pump motor and switch its power circuit.'],
+['Relays and 5 V / 24 V supplies','cab','Relays bridge the 5 V logic and the 24 V circuits. Transformers supply both voltages.'],
+['ESP32 WROOM-I','cab','The microcontroller that runs the pump logic, the sensors and the automatic and manual irrigation cycles.'],
+['Solenoid valve','valve','Opens and closes water flow to the green zone, driven by a relay.'],
+['Soil moisture sensor','soil','Measures the water content of the soil. Together with time, it triggers automatic irrigation.'],
+['DHT11','dht','Measures air humidity and temperature of the zone.']];
+C.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.setAttribute('aria-pressed','false');b.onclick=function(){pick(i)};$('chips').appendChild(b)});
+function pick(i){var bs=$('chips').children;for(var k=0;k<bs.length;k++)bs[k].setAttribute('aria-pressed',k==i);
+$('info').innerHTML='<b>'+C[i][0]+'</b>'+C[i][2];hl(C[i][1])}
+/* ---------- 3D ---------- */
+var G={},root=new THREE.Group(),sc=new THREE.Scene(),cv=$('cv'),R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true}),cam=new THREE.PerspectiveCamera(38,1.6,.1,100);
+cam.position.set(6,6.5,11);cam.lookAt(.5,.8,0);sc.add(root);
+sc.add(new THREE.AmbientLight(0xffffff,.7));var dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(5,10,6);sc.add(dl);
+function M(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.5,metalness:.15},o||{}))}
+function add(g,geo,mat,x,y,z,rz){var m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);if(rz)m.rotation.z=rz;m.userData.e=mat.emissive.getHex();root.add(m);if(g)(G[g]=G[g]||[]).push(m);return m}
+var Cy=function(r,h){return new THREE.CylinderGeometry(r,r,h,28)},Bx=function(a,b,c){return new THREE.BoxGeometry(a,b,c)};
+add(0,Bx(14,.2,7),M(0x1d4560),.5,-.1,0);
+var field=add(0,Bx(4.6,.1,4),M(0x8a6a3e),4,.03,.2);
+add('tank',Cy(1.2,2.6),M(0x9fd6e8,{transparent:true,opacity:.25}),-4.5,1.3,0);
+var wg=Cy(1.1,2.5);wg.translate(0,1.25,0);var water=add(0,wg,M(0x12b8a6,{transparent:true,opacity:.75}),-4.5,.05,0);
+add('us',Cy(.2,.22),M(0x222831),-4.5,2.72,0);add('float',new THREE.SphereGeometry(.17,16,16),M(0xf2a900),-4.1,2.2,.5);
+add('pump',Bx(.9,.6,.6),M(0x3a6ea5),-2.6,.4,.2);add('pump',Cy(.3,.9),M(0x3a6ea5),-2.6,.55,.2,1.57);
+add('cab',Bx(1.3,1.7,.5),M(0x8a97a3),-2.6,.85,-2.2);[0x35d07f,0xf2a900,0xff4d4d].forEach(function(c,i){add('cab',Bx(.15,.15,.05),M(c,{emissive:c,emissiveIntensity:.5}),-3+i*.4,1.35,-1.93)});
+add('cab',Bx(.9,.35,.05),M(0x0a3a5c),-2.6,.8,-1.93);
+var pm=M(0xc9d3da),pipes=[[-3.3,-2.2,.4],[-2,1,.4],[1.4,6,.35]];
+pipes.forEach(function(p){add(0,Cy(.09,p[1]-p[0]),pm,(p[0]+p[1])/2,p[2],.2,1.5708)});
+var coil=M(0x8a2020);add('valve',Bx(.5,.5,.5),M(0x4a5560),1.2,.4,.2);add('valve',Cy(.18,.4),coil,1.2,.8,.2);
+add('soil',Bx(.08,.7,.04),M(0x2a8a4a),3.2,.3,.7);add('soil',Bx(.2,.15,.06),M(0x222831),3.2,.7,.7);
+add('dht',Cy(.04,1),M(0xc9d3da),5.8,.5,-1.2);add('dht',Bx(.3,.4,.2),M(0x2f7fd0),5.8,1.15,-1.2);
+var pg=new THREE.ConeGeometry(.2,.5,10),pl=M(0x4f9d2f);
+for(var r=0;r<2;r++)for(var k=0;k<6;k++)add(0,pg,pl,2.2+k*.7,.3,r?1.1:-.7);
+var drops=[],dm=M(0x5ecbff,{emissive:0x2aa8ff,emissiveIntensity:.6});
+for(var d=0;d<9;d++)drops.push(add(0,new THREE.SphereGeometry(.07,8,8),dm,0,.35,.2));
+function hl(g){for(var k in G)G[k].forEach(function(m){m.material.emissive.setHex(k==g?0x8a6a00:m.userData.e)})}
+var drag=false,px=0,reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+cv.addEventListener('pointerdown',function(e){drag=true;px=e.clientX;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',function(e){if(drag){root.rotation.y+=(e.clientX-px)*.008;px=e.clientX}});
+cv.addEventListener('pointerup',function(){drag=false});
+function size(){var w=cv.clientWidth,h=w/1.6;R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(w,h,false)}
+addEventListener('resize',size);size();
+function sync(){water.scale.y=Math.max(.01,S.level/100);coil.color.setHex(S.valve?0x35d07f:0x8a2020);pm.color.setHex(S.valve?0x6fd6ff:0xc9d3da);
+field.material.color.setHex(S.moist>55?0x4a3320:S.moist>30?0x6d5030:0x8a6a3e);
+$('read').innerHTML='Tank <b>'+Math.round(S.level)+'%</b> · Pump <b>'+(S.pump?'ON':'OFF')+'</b><br>Valve <b>'+(S.valve?'OPEN':'closed')+'</b> · Soil <b>'+Math.round(S.moist)+'%</b> · '+(S.auto?'Auto':'Manual')}
+var t0=0;function loop(t){requestAnimationFrame(loop);if(!drag&&!reduced)root.rotation.y=Math.sin(t/4000)*.35;
+drops.forEach(function(d,i){d.visible=S.valve;d.position.x=1.4+((t/700+i*.5)%4.6)});R.render(sc,cam)}
+render();sync();pick(6);loop(0);
+</script>
+<script>
+var B={rs:{n:'Reserve board',w:5.8,d:4.6,p:[
+['ESP32 WROOM','ESP32',.5,.1,1.3,2,.12,0x1a1d22,0,'Microcontroller of the board: reads the float, the ultrasonic probe and the buttons, drives the relays and talks to the app.','esp'],
+['Relays RL1-RL3','RL1',-2,-1.1,1.2,1,.8,0xc9c28f,0,'Relays isolate the ESP32 logic from the power circuits, such as the pump contactor.'],
+['Relays RL1-RL3','RL2',-2,0,1.2,1,.8,0xc9c28f,0,''],
+['Relays RL1-RL3','RL3',-2,1.1,1.2,1,.8,0xc9c28f,0,''],
+['FLOTTEUR terminal','FLOTTEUR',-1.9,-1.9,.9,.5,.5,0x1f9d55,2,'2-pin terminal for the electric float switch that detects a full tank.'],
+['ARRET terminal','ARRET',-.2,-1.9,1.2,.5,.5,0x1f9d55,3,'Stop (arrêt) push-button input.'],
+['MARCHE terminal','MARCHE',1.6,-1.9,1.5,.5,.5,0x1f9d55,4,'Start (marche) push-button input to launch the filling cycle.'],
+['I2C connector','I2C',2.5,.2,.5,1.4,.4,0x1f9d55,4,'4-pin I2C connector (power, ground, SDA, SCL) for the LCD display.'],
+['JSN-SR-04T connector','JSN-SR-04T',.5,2,1.5,.5,.5,0x1f9d55,4,'Connector for the waterproof ultrasonic probe that measures the tank level.']]},
+ir:{n:'Irrigation board',w:5.6,d:4.4,p:[
+['ESP32 WROOM','ESP32',.3,.1,1.3,2,.12,0x1a1d22,0,'Microcontroller of the board: reads the soil and air sensors, drives the valve relay and talks to the app.','esp'],
+['Relay RL1','RL1',-1.9,.1,1,1.4,.8,0xc9c28f,0,'Relay that switches the solenoid valve.'],
+['ELECTROVANNE terminal','ELECTROVANNE',-1.7,-1.8,1.1,.5,.5,0x1f9d55,2,'2-pin terminal for the solenoid valve.'],
+['I2C connector','I2C',.8,-1.8,1.4,.5,.4,0x1f9d55,4,'4-pin I2C connector for the LCD display.'],
+['HUMIDITE SOL terminal','HUMIDITE SOL',2.3,.2,.5,1.3,.5,0x1f9d55,3,'3-pin connector for the soil moisture sensor.'],
+['DHT11 terminal','DHT11',.3,1.8,1.1,.5,.5,0x1f9d55,3,'3-pin connector for the DHT11 temperature and humidity sensor.']]}};
+var pcv=$('pcv'),pR=new THREE.WebGLRenderer({canvas:pcv,alpha:true,antialias:true}),pS=new THREE.Scene(),pC=new THREE.PerspectiveCamera(38,1.6,.1,100),pG=new THREE.Group(),pM={},cur='rs',pd=false,ppx=0;
+pC.position.set(0,7,6.5);pC.lookAt(0,0,0);pS.add(pG);pS.add(new THREE.AmbientLight(0xffffff,.75));var pl2=new THREE.DirectionalLight(0xffffff,.8);pl2.position.set(3,8,4);pS.add(pl2);
+function pm(c){return new THREE.MeshStandardMaterial({color:c,roughness:.55,metalness:.15})}
+function pa(geo,c,x,y,z){var m=new THREE.Mesh(geo,pm(c));m.position.set(x,y,z);pG.add(m);return m}
+function lab(t,x,y,z,w){var c=document.createElement('canvas');c.width=256;c.height=64;var g=c.getContext('2d');g.font='700 30px sans-serif';g.textAlign='center';g.textBaseline='middle';g.lineWidth=6;g.strokeStyle='#000';g.strokeText(t,128,32);g.fillStyle='#fff';g.fillText(t,128,32);
+var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true}));m.rotation.x=-1.5708;m.position.set(x,y,z);pG.add(m)}
+function buildPcb(k){cur=k;while(pG.children.length)pG.remove(pG.children[0]);pM={};var b=B[k];
+pa(new THREE.BoxGeometry(b.w,.12,b.d),0x1c6b2f,0,0,0);
+[[-1,-1],[1,-1],[-1,1],[1,1]].forEach(function(s){pa(new THREE.CylinderGeometry(.11,.11,.14,16),0x0b1a10,s[0]*(b.w/2-.25),0,s[1]*(b.d/2-.25))});
+var es=b.p[0];b.p.forEach(function(p,i){if(i)[[p[2],es[3]]].forEach(function(){var tx=new THREE.BoxGeometry(Math.abs(p[2]-es[2])+.06,.012,.06),tz=new THREE.BoxGeometry(.06,.012,Math.abs(p[3]-es[3])+.06);pa(tx,0xd9b44a,(p[2]+es[2])/2,.066,p[3]);pa(tz,0xd9b44a,es[2],.066,(p[3]+es[3])/2)})});
+b.p.forEach(function(p){var h=p[6],m=pa(new THREE.BoxGeometry(p[4],h,p[5]),p[7],p[2],.06+h/2,p[3]);(pM[p[0]]=pM[p[0]]||[]).push(m);
+if(p[10]=='esp'){pa(new THREE.BoxGeometry(.9,.1,.9),0xb8c0c8,p[2],.17,p[3]+.5);for(var j=0;j<10;j++)[-1,1].forEach(function(s){var q=pa(new THREE.BoxGeometry(.12,.03,.07),0xe3b341,p[2]+s*.7,.1,p[3]-.9+j*.2);(pM[p[0]]).push(q)})}
+else for(var j=0;j<p[8];j++){var q=pa(new THREE.CylinderGeometry(.09,.09,.05,14),0xdfe3e6,p[2]-p[4]/2+(j+.5)*p[4]/p[8],.06+h+.02,p[3]);(pM[p[0]]).push(q)}
+lab(p[1],p[2],.06+h+.04,p[3]+(p[10]=='esp'?-.55:(p[8]?.42:0)),p[4]>1?1.1:.9)})}
+function pHl(n){for(var k in pM)pM[k].forEach(function(m){m.material.emissive.setHex(k==n?0x886600:0)})}
+function pPick(n,d){$('pin').innerHTML='<b>'+n+'</b>'+d;pHl(n);var cs=$('pch').children;for(var i=0;i<cs.length;i++)cs[i].setAttribute('aria-pressed',cs[i].textContent==n)}
+function chipsFor(k){$('pch').innerHTML='';var seen={},b=B[k];b.p.forEach(function(p){if(p[9]&&!seen[p[0]]){seen[p[0]]=1;var bt=document.createElement('button');bt.textContent=p[0];bt.setAttribute('aria-pressed','false');bt.onclick=function(){pPick(p[0],p[9])};$('pch').appendChild(bt)}});pPick(b.p[0][0],b.p[0][9])}
+function showBoard(k){buildPcb(k);chipsFor(k);var bs=$('bt').children;for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].dataset.k==k);pG.rotation.y=0}
+for(var k in B){(function(k){var bt=document.createElement('button');bt.textContent=B[k].n;bt.dataset.k=k;bt.setAttribute('aria-pressed','false');bt.onclick=function(){showBoard(k)};$('bt').appendChild(bt)})(k)}
+pcv.addEventListener('pointerdown',function(e){pd=true;ppx=e.clientX;pcv.setPointerCapture(e.pointerId)});
+pcv.addEventListener('pointermove',function(e){if(pd){pG.rotation.y+=(e.clientX-ppx)*.008;ppx=e.clientX}});
+pcv.addEventListener('pointerup',function(){pd=false});
+function psz(){var w=pcv.clientWidth;pR.setPixelRatio(Math.min(devicePixelRatio,2));pR.setSize(w,w/1.6,false)}
+addEventListener('resize',psz);psz();showBoard('rs');
+function ploop(t){requestAnimationFrame(ploop);if(!pd&&!matchMedia('(prefers-reduced-motion:reduce)').matches)pG.rotation.y=Math.sin(t/3500)*.5;pR.render(pS,pC)}ploop(0);
+</script>
+</body>
+</html>
